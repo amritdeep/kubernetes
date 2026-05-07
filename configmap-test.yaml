@@ -7,3 +7,16 @@ data:
   DB_HOST: "test-db.internal"
   APP_MODE: "test"
   LOG_LEVER: "debug"
+  setttings.json:
+    {
+      "logLever": "debug"
+      "dbUrl" : "dev-db-url"
+    }
+volumeMounts:
+  - name: config-volume
+    mountPath: /app/config
+    readOnly: true
+volumes:
+  - name: config-volume
+    configMap:
+      name: app-config
