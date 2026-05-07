@@ -3,6 +3,11 @@ kind: Pod
 metadata:
   name: springboot-app
 spec:
+  restartPolicy: Never
+  initContainers:
+    name: db-migration
+    image: busybox
+    command: [sh -c 'echo "Run DB migration" && sleep 5 && exit 0']
   containers:
     - name: springboot-app-container
       image: myrepo/springboot-app:1.0
