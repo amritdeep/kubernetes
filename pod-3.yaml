@@ -4,8 +4,11 @@ metadata:
   name: debug-myapp
 spec:
   containers:
+    replicas: 3
+    revisionHistoryLimit: 10
     - name: myapp
       image: myapp:latest
+      imagePullPolicy: Always
       env:
         - name: LOG_LEVEL
           value: debug
