@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app-with-logging
+spec:
+  restartPolicy: Never
+  volumes:
+    - name: app-logs
+      emptyDir: {}
+
+  containers:
+    - name: app
+      image: ngnix:latest
+      command: [sh -c mvc install]
+      volumeMounts:
+        - name: app-logs
+          mountPath: /var/log
+
+    - name: log-shipper
+      image: busybox
+      command: [sh -c 'echo "write logs']
+      volumeMounts:
+        - name: app-logs
+          mountPath: /var/log
