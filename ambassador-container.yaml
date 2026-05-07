@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Deployment
+metadata:
+  name: app-with-ambassador
+spec:
+  replicas: 2
+  selector:
+    matchLables:
+      app: app-with-ambassador
+  template:
+    metadata:
+      labels:
+        app: app-with-ambassador
+    spec:
+      containerss:
+        - name: main-app
+          image: dockerhub/main-app:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: API_ENDPOINT
+              value: "http://localhost:9000"
+
+        - name: ambassador
+          image: dockerhub/ambassador:latest
+          ports:
+            - containerPort: 9000
+          env:
+            - name: PAYMETS_API_URL
+              value: "https://payments.example.com"
+            - name: SHIPPING_API_URL
+              value: "https://shipping.example.com"
+            - name: PAYMENTS_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: payments-secret
+                  key: api-key
+           - name: SHIPPING_API_KEY
+             valueFrom:
+              secretKeyRef:
+                name: shipping-secret
+                key: api-key
