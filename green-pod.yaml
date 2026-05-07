@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-green
+spec:
+  replicas: 5
+  selector:
+    matchLables:
+      app: my-app
+      version: green
+  template:
+    metadata:
+      labesl:
+        app: my-app
+        version: green
+    spec:
+      containers:
+        - name: app
+          image: my-registry/my-app:v2.0
+          ports:
+            - containerPort: 8080
