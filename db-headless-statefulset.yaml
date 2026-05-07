@@ -4,7 +4,9 @@ metadata:
   name: db
 spec:
   serviceName: db-headless
-  replicas: 2
+  replicas: 5
+  updateStrategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app: db
@@ -15,7 +17,7 @@ spec:
     spec:
       containers:
         - name: mysql
-          image: mysql:8.0
+          image: mysql:8.1
           ports:
             - containerPort: 3306
               name: mysql
@@ -25,7 +27,7 @@ spec:
           volumeMounts:
             - name: db-data
               mountPath: /var/lib/mysql
-  volumeClaimTeamplates:
+  volumeClaimTemplates:
     - metadata:
         name: db-data
       spec:
@@ -33,4 +35,4 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: 5Gi
+            storage: 10Gi
