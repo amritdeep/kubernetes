@@ -11,3 +11,12 @@ spec:
       envFrom:
         - configMapRef:
           name: node-env-config
+      env:
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+       - name: POD_IP
+         valueFrom:
+          fieldRef:
+            fieldPath: status.podIP
