@@ -25,3 +25,12 @@ spec:
           volumeMounts:
             - name: db-data
               mountPath: /var/lib/mysql
+  volumeClaimTeamplates:
+    - metadata:
+        name: db-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 5Gi
