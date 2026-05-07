@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: springboot-app
+spec:
+  containers:
+    - name: springboot-app-container
+      image: myrepo/springboot-app:1.0
+      ports:
+        - containerPort: 8080
