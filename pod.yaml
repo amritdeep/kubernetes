@@ -8,3 +8,13 @@ spec:
       image: myrepo/springboot-app:1.0
       ports:
         - containerPort: 8080
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExection:
+            - labelSelector:
+               matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                    - my-backend
+            toplogykey: "kuberneteds.io/hostname"
