@@ -6,4 +6,8 @@ data:
   APP_URL: "https://prod.example.com"
   DB_HOST: "prod-db.internal"
   APP_MODE: "production"
-  LOG_LEVER: "info"
+  LOG_LEVER: "info"  
+  application.properties: |
+  logging.leverl.root=INFO
+  feature.newDashboard=true
+  app.environment=dev
